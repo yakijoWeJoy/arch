@@ -32,7 +32,7 @@
 Organization (ours | external)
  └─ System                       ← C4 Software System
      └─ Component                ← C4 Container: service | database | broker | gateway | batch | load_balancer | external
-         └─ Interface            ← rest | soap | queue | cron | vip
+         └─ Interface            ← rest | soap | queue | cron | vip | db
 Hosting (עץ): site(on-prem|cloud) → server | vm | k8s_cluster → namespace
 Component.hosting_id → Hosting
 Scenario ── Thread(A,B,C…) ── Step
@@ -49,6 +49,7 @@ Scenario ── Thread(A,B,C…) ── Step
   - `queue`: queue_name — **התור שייך לרכיב ה־broker**
   - `cron`: cron_expr — שייך לרכיב שמתוזמן
   - `vip`: address — שייך לרכיב F5 (`kind='load_balancer'`); כל VIP הוא ממשק נפרד ⇒ פריט קטלוג
+  - `db`: שם סכמה/טבלה — שייך לרכיב database (כדי שגישה ל־DB תופיע כצעד)
 - **scenarios**: `id, name, description, trigger_interface_id?, parent_scenario_id?, branch_label?`
   - הטריגר הוא ממשק (REST/SOAP נכנס, תור, או cron). תרחיש חלופי מצביע על תרחיש האב + תווית התנאי ("אם הנמל דחה").
 - **threads**: `id, scenario_id, label('A','B'…), kind('main'|'async'|'feedback'), origin_step_id?`
